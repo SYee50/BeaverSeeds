@@ -1,0 +1,54 @@
+{% extends 'layout.j2' %}
+
+{% block title %}Seed Types{% endblock %}
+
+{% block scripts %}
+  <script src="../static/js/add.js" defer></script>
+{% endblock %}
+
+{% block content %}
+    <h2>Seed Types</h2>
+    <button id="add-btn">Add a New Seed Type</button>
+    <table>
+      <thead>
+        <tr>
+            {# Fills Table Header Columns #}
+            {% for col_name in col_names %}
+                <th>{{ col_name }}</th>
+            {% endfor %}
+          </tr>
+      </thead>
+      <tbody>
+        {# Create a row for each Seed Type, adding the Seed Type's attributes to the columns. #}
+        {% for seed_type in seed_types %}
+                {% for key in seed_type.keys() %}
+                    <td>{{seed_type[key]}}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+        
+      </tbody>
+    </table>
+{% endblock %}
+
+
+{% block modal %}
+  <!-- Add Modal -->
+  <div class="modal-container" id="add">
+    <div class="modal">
+      <h2>Add Seed Type</h2>
+      <p>Seed Type must be unique</p>
+      <form id="add-form" action="./create" method="POST">
+        <div>
+          <label for="seed-type">Seed Type:</label>
+          <input type="text" id="seed-type" name="seed-type" required>
+        </div>
+        <div class="form-btn">
+          <button type="submit" class="add-btn">Add Seed Type</button>
+          <button type="button" class="cancel-btn" id="add-cancel">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

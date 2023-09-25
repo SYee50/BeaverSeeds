@@ -1,0 +1,225 @@
+:root {
+  /* https://coolors.co/palettes/popular */
+  --white: white;
+  --silver: #f8f9fa;
+  --light-blue: #d1f8f4;
+  --black: #000000;
+  --turquoise: #00b4d8;
+}
+
+body,
+input[type="date"] {
+  font-family: Arial, sans-serif;
+}
+
+body {
+  max-width: 1600px;
+  margin: 0 auto 100px;
+  background-color: var(--silver);
+  color: var(--black);
+}
+
+header {
+  background-color: var(--turquoise);
+  color: var(--white);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: var(--white);
+  text-decoration: none;
+  margin-right: 10px;
+  padding: 6px;
+  border-radius: 3px;
+  font-size: large;
+}
+
+nav a:hover {
+  color: var(--turquoise);
+  background-color: var(--silver);
+}
+
+h2 {
+  color: var(--turquoise);
+  font-size: 28px;
+  margin-top: 40px;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+table {
+  /* border-spacing: 0 10px; */
+  width: 80%;
+  margin: 40px auto;
+  border-spacing: 0;
+}
+
+th,
+td {
+  padding: 20px;
+  text-align: left;
+  vertical-align: middle;
+}
+
+thead {
+  background-color: var(--turquoise);
+  color: var(--white);
+}
+
+tbody {
+  background-color: var(--white);
+}
+
+thead > tr:hover {
+  background-color: var(--turquoise);
+}
+
+tr:hover {
+  background-color: var(--light-blue);
+}
+
+button {
+  background-color: var(--turquoise);
+  border: 2px solid var(--turquoise);
+  border-radius: 10px;
+  padding: 4px 10px;
+  color: var(--white);
+  font-weight: bold;
+  font-size: 90%;
+}
+
+button:hover {
+  background-color: var(--white);
+  border: 2px solid var(--turquoise);
+  color: var(--turquoise);
+  cursor: pointer;
+}
+
+footer {
+  color: var(--turquoise);
+  text-align: center;
+  font-size: 14px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--silver);
+}
+
+/* Modal Styles */
+.modal-container {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal {
+  background-color: var(--white);
+  width: 50%;
+  margin: auto;
+  position: relative;
+  top: 10%;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+}
+
+input[type="number"] {
+  width: 60px;
+}
+
+.modal label,
+.modal input,
+.modal select {
+  padding: 2px;
+  margin-bottom: 10px;
+}
+
+.modal input,
+.modal select {
+  padding: 4px;
+  border: 2px solid rgb(118, 118, 118);
+  border-radius: 5px;
+  font-size: 95%;
+}
+
+/* Seed input on Add Sales Form */
+.modal td > input,
+.modal td > select {
+  margin: 0;
+}
+
+.modal p {
+  margin: 0 0 10px 0;
+  font-size: 90%;
+}
+
+.form-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+  gap: 10px;
+}
+
+#add-seed-btn {
+  margin-bottom: 10px;
+}
+
+/* Homepage Styles */
+#page-descriptions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+#homepage-intro {
+  margin-bottom: 35px;
+}
+
+h3 a {
+  text-decoration: none;
+  color: var(--turquoise);
+}
+
+/* Form Styles */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  float: left;
+  margin-right: 20px;
+}
+
+input,
+select {
+  float: right;
+}
+
+#seed-type,
+#supplier {
+  width: 150px;
+}

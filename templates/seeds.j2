@@ -1,0 +1,149 @@
+{% extends 'layout.j2' %}
+
+{% block title %}Seeds{% endblock %}
+
+{% block scripts %}
+  <script src="../static/js/seeds.js" defer></script>
+  <script src="../static/js/add.js" defer></script>
+{% endblock %}
+
+{% block content %}
+    <h2>Seeds</h2>
+    <button id="add-btn">Add a New Seed</button>
+    <table>
+      <thead>
+        <tr>
+            {# Fills Table Header Columns, excluding the ids. #}
+            {% for col_name in col_names if not col_name == 'seed_id' and not col_name == 'seed_type_id' %}
+                <th>{{ col_name }}</th>
+            {% endfor %}
+
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+      </thead>
+      <tbody>
+        {# Create a row for each Seed, adding the Seed's attributes to each column. #}
+        {% for seed in seeds %}
+            <tr id={{ seed['seed_id'] }}>
+                {% for key in seed.keys() if not key == 'seed_id' and not key == 'seed_type_id' %}
+                    <td>{{seed[key]}}</td>
+                {% endfor %}
+            
+                <td><button class="edit-btn" 
+                    data-id="{{seed['seed_id']}}"
+                    data-name="{{seed['Seed Name']}}" 
+                    data-type="{{seed['seed_type_id']}}"
+                    data-supplier="{{seed['Supplier ID']}}"
+                    >Edit</button>
+                </td>
+                <td>
+                    <button type="submit" 
+                    class="delete-btn" 
+                    data-id="{{seed['seed_id']}}"
+                    >Delete</button>
+                </td>
+            </tr>
+        {% endfor %}
+        
+      </tbody>
+    </table>
+{% endblock %}
+
+
+{% block modal %}
+  <!-- Edit Modal -->
+  <div class="modal-container" id="edit">
+    <div class="modal">
+      <h2>Edit Seed</h2>
+      <p>Seed names must be unique</p>
+      <form id="edit-form" action="./update" method="POST">
+        <div>
+          <input type="hidden" id="seed-id" name="seed-id" value="">
+
+          <label for="seed-name">Seed Name:</label>
+          <input type="text" id="seed-name" name="seed-name" required>
+        </div>
+        <div>
+          <label for="seed-type">Seed Type:</label>
+          <select id="seed-type" name="seed-type">
+            {# Fills the dropdown menu with each Seed Type, showing the id and seed type (name),
+               using the id as the value. #}
+            {% for seed_type in seed_types %}
+                <option value={{seed_type['seed_type_id']}}>{{seed_type['seed_type']}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div>
+          <label for="supplier">Supplier:</label>
+          <select id="supplier" name="supplier">
+
+            {# Hardcode option for No Supplier (NULL) with a value of 0. #}
+            <option value="0">No Supplier</option>
+
+            {# Fills the dropdown menu with each Supplier, showing the id and
+               name, using the id as the value. #}
+            {% for supplier in suppliers %}
+                <option value={{supplier['supplier_id']}}>
+                {{supplier['supplier_id']}}: {{supplier['supplier_name']}}
+                </option>
+            {% endfor %}
+
+          </select>
+        </div>
+        <div class="form-btn">
+          <button type="submit" class="save-btn">Save Changes</button>
+          <button type="button" class="cancel-btn" id="cancel">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- Add Modal -->
+  <div class="modal-container" id="add">
+    <div class="modal">
+      <h2>Add Seed</h2>
+      <p>Seed names must be unique</p>
+      <form id="add-form" action="./create" method="POST">
+        <div>
+          <label for="seed-name">Seed Name:</label>
+          <input type="text" id="seed-name" name="seed-name" required>
+        </div>
+        <div>
+          <label for="seed-type">Seed Type:</label>
+          <select id="seed-type" name="seed-type">
+            {# Fills the dropdown menu with each Seed Type, showing the id and seed type (name),
+               using the id as the value. #}
+            {% for seed_type in seed_types %}
+                <option value={{seed_type['seed_type_id']}}>{{seed_type['seed_type']}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div>
+          <label for="supplier">Supplier:</label>
+          <select id="supplier" name="supplier">
+
+            {# Hardcode option for No Supplier (NULL) with a value of 0. #}
+            <option value="0">No Supplier</option>
+
+            {# Fills the dropdown menu with each Supplier, showing the id and
+               name, using the id as the value. #}
+            {% for supplier in suppliers %}
+                <option value={{supplier['supplier_id']}}>
+                {{supplier['supplier_id']}}: {{supplier['supplier_name']}}
+                </option>
+            {% endfor %}
+            
+          </select>
+        </div>
+        <div class="form-btn">
+          <button type="submit" class="add-btn">Add Seed</button>
+          <button type="button" class="cancel-btn" id="add-cancel">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+{% endblock %}

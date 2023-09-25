@@ -1,0 +1,131 @@
+{% extends 'layout.j2' %}
+
+{% block title %}Sales{% endblock %}
+
+{% block scripts %}
+  <script src="../static/js/sales.js" defer></script>
+  <script src="../static/js/add.js" defer></script>
+{% endblock %}
+
+{% block content %}
+        <h2>Sales</h2>
+        <button id="add-btn">Add a New Sale</button>
+        <table>
+            <thead>
+                <tr>
+                    {# Fills Table Header Columns #}
+                    {% for col_name in col_names if not col_name == 'seed_id' and not col_name == 'seed_type_id' %}
+                        <th>{{col_name}}</th>
+                    {% endfor %}
+                    <th>Details</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {# Creates a row for each Sale, adding the Sale's attributes to each column.  #}
+                {% for sale in sales %}
+                    <tr id="{{sale['Sale ID']}}">
+                        {% for sale_col in sale %}
+                            <td>{{sale[sale_col]}}</td>
+                        {% endfor %}
+                        <td><button class="view-details-btn" data-id="{{sale['Sale ID']}}">View Details</button></td>
+                        <td><button class="delete-btn" data-id="{{sale['Sale ID']}}">Delete</button></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endblock %}
+
+
+    {% block modal %}
+
+    <!-- Add Modal -->
+    <div class="modal-container" id="add">
+        <div class="modal">
+            <h2>Add Sale</h2>
+            <form id="add-form" action="./create" method="POST">
+                <label for="customer">Customer:</label>
+                <select name="customer" id="customer">
+                    {# Fills the dropdown menu with each Customer's id and name, using
+                       the id as the value  #}
+                    {% for customer in customers %}
+                        <option value="{{customer['customer_id']}}">
+                        {{customer['customer_id'] }}: {{ customer['Customer Name']}}
+                        </option>
+                    {% endfor %}
+                </select>
+                <label for="date">Date:</label>
+                <input type="date" name="date" id="date" required>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Seed Name</th>
+                            <th>Quantity</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="sales-details-table">
+                        <tr id="add-seed-row">
+                            <td>
+                                <select name="seed[]" required>
+                                    {# Fills the dropdown menu with each Seed's 
+                                       name, using the id as the value. #}
+                                    {% for seed in seeds %}
+                                        <option value="{{seed['seed_id']}}">
+                                        {{seed['seed_name']}}
+                                        </option>
+                                    {% endfor %}                                
+                                </select>
+                            </td>
+                            <td><input type="number" name="quantity[]" min="1" required></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    
+                </table>
+                <div class="form-btn">
+                    <button type="button" class="add-btn" id="add-seed-btn">Add a Seed</button>
+                </div>
+                <div class="form-btn">
+                    <button type="submit" class="add-btn">Add Sale</button>
+                    <button type="button" class="cancel-btn" id="add-cancel">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Sales Detail Modal -->
+    <div class="modal-container" id="sale-details">
+        <div class="modal">
+            <h2>Sales Details</h2>
+            <table id="view-basic-table">
+                <thead>
+                    <tr>
+                    {# Fills Table Header Columns for the Sale associated with the Sales Details. #}
+                    {% for col_name in col_names if not col_name == 'seed_id' and not col_name == 'seed_type_id' %}
+                        <th>{{col_name}}</th>
+                    {% endfor %}
+                    </tr>
+                </thead>
+                <tbody><tr id="basic-sale-row"></tr></tbody>
+
+            </table>
+            <table id="view-details-table">
+                <thead>
+                    <tr>
+                        {# Column Names for the Sales Details (hardcoded). #}
+                        <th>Seed Name</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody id="details-table-body">
+
+                </tbody>
+            </table>
+            <div class="form-btn">
+            <button type="button" class="cancel-btn" id="close-details">Close</button>
+        </div>
+        </div>
+    </div>
+
+{% endblock %}

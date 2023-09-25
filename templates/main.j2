@@ -1,0 +1,33 @@
+{% extends 'layout.j2' %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block content %}
+    <div id="page-descriptions">
+        <div id="homepage-intro">
+            <h2>Welcome to Beaver Seeds!</h2>
+            <p>This page gives you an overview of each of the pages on this website.</p>
+        </div>
+        <div>
+            <h3><a href="/seeds">Seeds Page</a></h3>
+            <p>This page displays seed information, you can add a new seed to the database, you can edit seed information, and you can delete a seed from the database.</p>
+        </div>
+        <div>
+            <h3><a href="/seed_types">Seed Types Page</a></h3>
+            <p>This page displays seed type information and you can add a new seed type to the database.</p>
+        </div>
+        <div>
+            <h3><a href="/sales">Sales and Sales Details Page</a></h3>
+            <p>This page displays sale and sales detail information, you can add a new sale and sales detail to the database, and you can delete a sale from the database.</p>
+        </div>
+        <div>
+            <h3><a href="/suppliers">Suppliers Page</a></h3>
+            <p>This page displays supplier information, you can add a new supplier to the database, and you can delete a supplier from the database.</p>
+        </div>
+        <div>
+            <h3><a href="/customers">Customers Page</a></h3>
+            <p>This page displays customer information, you can add a new customer to the database.</p>
+        </div>
+    </div>
+{% endblock %}
+    

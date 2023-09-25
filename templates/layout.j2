@@ -1,0 +1,45 @@
+{# Template Layout File 
+
+  To use this layout, extend layout.j2 and customize the following blocks: 
+    title, scripts (optional), content, and modal (optional).
+#}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beaver Seeds - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    {% block scripts %}{% endblock %}
+</head>
+<body>
+    <header>
+        <h1>Beaver Seeds</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/seeds">Seeds</a>
+            <a href="/seed_types">Seed Types</a>
+            <a href="/sales">Sales</a>
+            <a href="/suppliers">Suppliers</a>
+            <a href="/customers">Customers</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+        
+        {% block modal %}
+        {% endblock %}
+
+    <footer>
+        <p>&copy; 2023 Beaver Seeds</p>
+    </footer>
+
+
+</body>
+</html>
